@@ -5,27 +5,39 @@ import java.util.Arrays;
 public class Filter {
 	
 	public static String[] selectiveFilter(String[] words, String key, int matchKey) {
+		
 		String[] filteredWords = new String[words.length];
+		
 		int size = 0;
+		
 		key = key.toLowerCase();
 	 
 		for (int i=0; i<words.length; i++) {
-			String crtWord = words[i].toLowerCase();
-			int minLength = Math.min(crtWord.length(), key.length());
-			int countMatches = 0;
+			
+			String currentWord = words[i].toLowerCase();
+			
+			int minLength = Math.min(currentWord.length(), key.length());
+			
+			int counter = 0;
+			
 			for (int j=0; j<minLength; j++) {
-				if (crtWord.charAt(j) == key.charAt(j)) {
-					countMatches++;
+				
+				if (currentWord.charAt(j) == key.charAt(j)) {
+					
+					counter++;
 				}
 			}
-			if (countMatches >= matchKey) {
-				filteredWords[size] = words[i]; // the original word (not crtWord)
+			
+			if (counter >= matchKey) {
+				
+				filteredWords[size] = words[i];
 				size++;
 			}
 		}
 		 
 		return Arrays.copyOf(filteredWords, size);
 	}
+	
 	public static void printArray(String[] array){
 		
 		for(int i = 0; i < array.length; i++) {
